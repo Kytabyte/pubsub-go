@@ -20,6 +20,11 @@ Output will be in `output/window_[sum|median]_result.txt`
 Once the following log is presented, we can stop running the container by
 pressing Ctrl+C at any time.
 
+```
+pubsub-go_subscriber_1 exited with code 0
+pubsub-go_publisher_1 exited with code 0
+```
+
 ## Validation
 
 Run the following commands to run validation script
