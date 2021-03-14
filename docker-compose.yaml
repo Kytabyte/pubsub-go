@@ -1,0 +1,33 @@
+version: "3.0"
+services:
+  redis:
+    image: "redis:alpine"
+    command: redis-server /usr/local/etc/redis/redis.conf
+    volumes:
+      - ./manager/redis/data:/data #Used for persisting data
+      - ./manager/redis/conf:/usr/local/etc/redis #Used for configuring redis
+    networks:
+      - data_sharing
+  publisher:
+    build:
+      context: ./publisher
+      dockerfile: Dockerfile
+    depends_on: 
+      - redis
+      - subscriber
+    networks:
+      - data_sharing
+  subscriber:
+      build:
+        context: ./subscriber
+        dockerfile: Dockerfile
+      depends_on: 
+        - redis
+      networks:
+        - data_sharing
+      volumes: 
+        - ./output:/app/output # mount subscriber's output
+
+networks:
+  data_sharing:
+    driver: bridge
