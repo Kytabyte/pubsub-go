@@ -16,3 +16,6 @@
 
 # running result
 output/*.txt
+
+# redis database
+manager/redis/data/*.rdb
